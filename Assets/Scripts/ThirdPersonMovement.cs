@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.EventSystems;
 
 public class ThirdPersonMovement : MonoBehaviour
 {
@@ -10,13 +11,13 @@ public class ThirdPersonMovement : MonoBehaviour
     public event Action StartJumping= delegate { };
     public event Action StartFalling = delegate { };
     public event Action StartSprinting = delegate { };
+    public event Action StartAiming = delegate { };
 
     [SerializeField] CharacterController controller = null;
 
     [SerializeField] Transform cam = null;
-    
-    [SerializeField] float speed = 6f;
-    [SerializeField] float sprintSpeed = 12f;
+
+    //[SerializeField] float sprintSpeed = 2.0f;
 
     [SerializeField] float turnSmoothTime = 0.1f;
 
@@ -30,6 +31,10 @@ public class ThirdPersonMovement : MonoBehaviour
 
     bool _isMoving = false;
     bool _isJumping = false;
+    bool _isAiming = false;
+
+    float sprintSpeed = 12.0f;
+
 
     private void Start()
     {
@@ -63,29 +68,41 @@ public class ThirdPersonMovement : MonoBehaviour
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
 
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        
-        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
-
-        if (Input.GetKey(KeyCode.LeftShift))
+        if(Input.GetMouseButtonDown(0) && groundedPlayer)
         {
-            controller.Move(move * Time.deltaTime * (playerSpeed + sprintSpeed));
-            CheckIfStartedSprinting();
+            CheckIfStartedAiming();
         }
 
-        if (direction.magnitude >= 0.1f)
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            CheckIfStartedAiming();
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        {
+            StartSprinting?.Invoke();
+            playerSpeed = sprintSpeed;
+            controller.Move(move * playerSpeed * Time.deltaTime);
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
+        {
+            StartRunning?.Invoke();
+            playerSpeed = 2.0f;
+            controller.Move(move * playerSpeed * Time.deltaTime);
+        }
+
+            if (move.magnitude >= 0.1f)
         {
             CheckIfStartedMoving();
   
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(move.x, move.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 movDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            
-            controller.Move(movDir.normalized * speed * Time.deltaTime);
+            controller.Move(movDir.normalized * playerSpeed * Time.deltaTime);
         }
         else
         {
@@ -119,7 +136,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void CheckIfStartedJumping()
     {
-        if(_isMoving == false)
+        if (_isMoving == false)
         {
             StartJumping?.Invoke();
         }
@@ -128,10 +145,18 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void CheckIfStartedSprinting()
     {
-        if (_isMoving == false)
+        if (_isMoving == true)
         {
             StartSprinting?.Invoke();
         }
-        _isMoving = true;
+    }
+
+    private void CheckIfStartedAiming()
+    {
+        if (_isMoving == false)
+        {
+            StartAiming?.Invoke();
+        }
+        _isAiming = true;
     }
 }
