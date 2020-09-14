@@ -91,8 +91,8 @@ public class ThirdPersonMovement : MonoBehaviour
             playerSpeed = 2.0f;
             controller.Move(move * playerSpeed * Time.deltaTime);
         }
-
-            if (move.magnitude >= 0.1f)
+        
+        if (move.magnitude >= 0.1f)
         {
             CheckIfStartedMoving();
   
