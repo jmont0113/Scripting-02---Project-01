@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     [SerializeField] Ability _newAbilityToTest;
     [SerializeField] Ability _newAbilityLaser;
 
-
     [SerializeField] Transform _testTranform = null;
 
     public Transform CurrentTarget { get; private set; }

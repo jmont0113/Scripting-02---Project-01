@@ -13,6 +13,6 @@ public class Cure : Ability
 
         Debug.Log("Cast Cure." + target.gameObject.name);
         // if the target has health, heal it 
-        target.GetComponent<Health>()?.Heal(_healthAmount);
+       // target.GetComponent<Health>()?.Heal(_healthAmount);
     }
 }

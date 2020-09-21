@@ -14,6 +14,8 @@ public class PlayerCharacterAnimator : MonoBehaviour
     const string FallState = "Falling";
     const string SprintState = "Sprinting";
     const string AimingState = "Aiming";
+    const string TookDamageState = "TookDamage";
+    const string DeadState = "Dead";
 
     Animator _animator = null;
 
@@ -30,6 +32,8 @@ public class PlayerCharacterAnimator : MonoBehaviour
         _thirdPersonMovement.StartFalling += OnStartFalling;
         _thirdPersonMovement.StartSprinting += OnStartSprinting;
         _thirdPersonMovement.StartAiming += OnStartAiming;
+        _thirdPersonMovement.TookDamage += OnTookDamage;
+        _thirdPersonMovement.Dead += OnDead;
     }
 
     private void OnDisable()
@@ -40,6 +44,8 @@ public class PlayerCharacterAnimator : MonoBehaviour
         _thirdPersonMovement.StartFalling -= OnStartFalling;
         _thirdPersonMovement.StartSprinting -= OnStartSprinting;
         _thirdPersonMovement.StartAiming -= OnStartAiming;
+        _thirdPersonMovement.TookDamage -= OnTookDamage;
+        _thirdPersonMovement.Dead -= OnDead;
     }
 
     public void OnIdle()
@@ -70,5 +76,14 @@ public class PlayerCharacterAnimator : MonoBehaviour
     private void OnStartAiming()
     {
         _animator.CrossFadeInFixedTime(AimingState, .2f);
+    }
+
+    private void OnTookDamage()
+    {
+        _animator.CrossFadeInFixedTime(TookDamageState, .2f);
+    }
+    private void OnDead()
+    {
+        _animator.CrossFadeInFixedTime(DeadState, .2f);
     }
 }

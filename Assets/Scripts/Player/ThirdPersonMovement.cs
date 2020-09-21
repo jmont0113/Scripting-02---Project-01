@@ -8,10 +8,12 @@ public class ThirdPersonMovement : MonoBehaviour
 {
     public event Action Idle = delegate { };
     public event Action StartRunning = delegate { };
-    public event Action StartJumping= delegate { };
+    public event Action StartJumping = delegate { };
     public event Action StartFalling = delegate { };
     public event Action StartSprinting = delegate { };
     public event Action StartAiming = delegate { };
+    public event Action TookDamage = delegate { };
+    public event Action Dead = delegate { };
 
     [SerializeField] CharacterController controller = null;
 
@@ -68,7 +70,7 @@ public class ThirdPersonMovement : MonoBehaviour
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
 
-        if(Input.GetMouseButtonDown(0) && groundedPlayer)
+        if (Input.GetMouseButtonDown(0) && groundedPlayer)
         {
             CheckIfStartedAiming();
         }
@@ -91,14 +93,14 @@ public class ThirdPersonMovement : MonoBehaviour
             playerSpeed = 2.0f;
             controller.Move(move * playerSpeed * Time.deltaTime);
         }
-        
+
         if (move.magnitude >= 0.1f)
         {
             CheckIfStartedMoving();
-  
+
             float targetAngle = Mathf.Atan2(move.x, move.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            
+
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 movDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
@@ -112,7 +114,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void CheckIfStartedMoving()
     {
-        if(_isMoving == false)
+        if (_isMoving == false)
         {
             // our velocity says we're moving but we previously were not
             // this means we've started moving!
@@ -158,5 +160,15 @@ public class ThirdPersonMovement : MonoBehaviour
             StartAiming?.Invoke();
         }
         _isAiming = true;
+    }
+
+    public void PlayerDead()
+    {
+        Dead?.Invoke();
+    }
+
+    public void PlayerTookDamage()
+    {
+        TookDamage?.Invoke();
     }
 }

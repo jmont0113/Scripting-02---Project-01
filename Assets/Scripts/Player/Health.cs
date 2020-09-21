@@ -1,21 +1,76 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    int _currentHealth = 50;
-    [SerializeField] GameObject thePlayer;
+    [SerializeField] public int _currentHealth;
 
-    public void Heal(int amount)
+    [SerializeField] public int _maxHealth = 100;
+
+    [SerializeField] HealthBar healthBar;
+
+    [SerializeField] public AudioSource _healthDamage;
+
+    [SerializeField] ThirdPersonMovement thirdPersonMovement;
+
+    [SerializeField] ScreenFlashImage screenFlash;
+
+    [SerializeField] FlashImage _flashImage = null;
+
+    [SerializeField] Color _newColor = Color.red;
+
+    private float dyingTime = 3f;
+
+    void Start()
     {
-        _currentHealth += amount;
-        Debug.Log(gameObject.name + " has healed " + amount);
+        _currentHealth = _maxHealth;
+
+        healthBar.SetMaxHealth(_maxHealth);
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            TakeDamage(20);
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _healthDamage.Play();
+
+        _currentHealth -= damage;
+
+        thirdPersonMovement.GetComponent<Animator>().Play("TookDamage");
+
+        _flashImage.StartFlash(.25f, .5f, _newColor);
+
+        healthBar.SetHealth(_currentHealth);
 
         if (_currentHealth <= 0)
         {
-            //if health has fallen below zero, deactivate it 
-            thePlayer.GetComponent<Animator>().Play("Falling");
+            Kill();
         }
     }
+
+    public void Kill()
+    {
+        StartCoroutine(KillPlayer());
+        // play particles
+        // play sounds
+    }
+
+    IEnumerator KillPlayer()
+    {
+        thirdPersonMovement.GetComponent<Animator>().Play("Dead");
+        yield return new WaitForSeconds(dyingTime);
+        gameObject.SetActive(false);
+    }
+
 }
+
+// PlayerTookDamage()
+//PlayerDead()
