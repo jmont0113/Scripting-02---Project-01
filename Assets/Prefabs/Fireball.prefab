@@ -43,8 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a025302eecd88a42bec1448fe6415e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _impactParticles: {fileID: 2749752350625318780, guid: 44ea420b75634f047af44ad8d94ac271,
-    type: 3}
-  _impactSound: {fileID: 8300000, guid: a75b8fb480484d140b1ecff9837e68be, type: 3}
   _projectileSpawned: {fileID: 4640538299030289055, guid: 44ea420b75634f047af44ad8d94ac271,
+    type: 3}
+  fireSound: {fileID: 8108881271060623452, guid: 2ff8eec1e5429d1409a8db31e08e93ee,
     type: 3}

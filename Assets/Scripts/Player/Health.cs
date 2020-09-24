@@ -23,6 +23,8 @@ public class Health : MonoBehaviour
 
     private float dyingTime = 3f;
 
+    [SerializeField] public AudioSource _Dead;
+
     void Start()
     {
         _currentHealth = _maxHealth;
@@ -59,18 +61,14 @@ public class Health : MonoBehaviour
     public void Kill()
     {
         StartCoroutine(KillPlayer());
-        // play particles
-        // play sounds
     }
 
     IEnumerator KillPlayer()
     {
+        
         thirdPersonMovement.GetComponent<Animator>().Play("Dead");
+        _Dead.Play();
         yield return new WaitForSeconds(dyingTime);
         gameObject.SetActive(false);
     }
-
 }
-
-// PlayerTookDamage()
-//PlayerDead()

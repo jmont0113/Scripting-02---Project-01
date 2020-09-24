@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
         {
             _abilityLoadout.UseEquippedAbility(CurrentTarget);
         }
+
         //equip new weapon
         if(Input.GetKeyDown(KeyCode.Tab))
         {
@@ -47,6 +48,7 @@ public class Player : MonoBehaviour
             _abilityLoadout.EquipAbility(_newAbilityLaser);
             _abilityLoadout.UseEquippedAbility(CurrentTarget);
         }
+
         // set a target, for testing 
         if (Input.GetKeyDown(KeyCode.Space))
         {

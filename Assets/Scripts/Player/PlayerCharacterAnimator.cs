@@ -16,6 +16,7 @@ public class PlayerCharacterAnimator : MonoBehaviour
     const string AimingState = "Aiming";
     const string TookDamageState = "TookDamage";
     const string DeadState = "Dead";
+    const string MeleeState = "Melee";
 
     Animator _animator = null;
 
@@ -34,6 +35,7 @@ public class PlayerCharacterAnimator : MonoBehaviour
         _thirdPersonMovement.StartAiming += OnStartAiming;
         _thirdPersonMovement.TookDamage += OnTookDamage;
         _thirdPersonMovement.Dead += OnDead;
+        _thirdPersonMovement.StartMelee += OnStartMelee;
     }
 
     private void OnDisable()
@@ -46,6 +48,7 @@ public class PlayerCharacterAnimator : MonoBehaviour
         _thirdPersonMovement.StartAiming -= OnStartAiming;
         _thirdPersonMovement.TookDamage -= OnTookDamage;
         _thirdPersonMovement.Dead -= OnDead;
+        _thirdPersonMovement.StartMelee -= OnStartMelee;
     }
 
     public void OnIdle()
@@ -80,10 +83,15 @@ public class PlayerCharacterAnimator : MonoBehaviour
 
     private void OnTookDamage()
     {
-        _animator.CrossFadeInFixedTime(TookDamageState, .2f);
+        _animator.CrossFadeInFixedTime(TookDamageState, .3f);
     }
     private void OnDead()
     {
-        _animator.CrossFadeInFixedTime(DeadState, .2f);
+        _animator.CrossFadeInFixedTime(DeadState, 3f);
+    }
+
+    private void OnStartMelee()
+    {
+        _animator.CrossFadeInFixedTime(MeleeState, .2f);
     }
 }

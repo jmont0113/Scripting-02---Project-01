@@ -4,8 +4,10 @@ using System.Collections;
 public class ShootableBoxes : MonoBehaviour
 {
     //The box's current health point total
-    public int _health;
-    public int _maxHealth = 3;
+    [SerializeField] public int _health;
+    [SerializeField] public int _maxHealth = 3;
+
+    [SerializeField] AudioSource boxHitSound;
 
     private void Start()
     {
@@ -31,6 +33,7 @@ public class ShootableBoxes : MonoBehaviour
 
         if (laserShot != null)
         {
+            boxHitSound.Play();
             gameObject.SetActive(false);
         }
     }
