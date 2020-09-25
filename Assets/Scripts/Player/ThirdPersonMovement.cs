@@ -72,6 +72,7 @@ public class ThirdPersonMovement : MonoBehaviour
                 CheckIfStartedMoving();
             }
 
+           
             float targetAngle = Mathf.Atan2(move.x, move.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 
@@ -155,9 +156,9 @@ public class ThirdPersonMovement : MonoBehaviour
         _isAiming = true;
     }
 
-        private void Jumping()
+    private void Jumping()
     {
-        if (Input.GetButtonDown("Jump") && groundedPlayer)
+        if (Input.GetButtonDown("Jump"))
         {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
             StartJumping?.Invoke();

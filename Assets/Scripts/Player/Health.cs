@@ -21,7 +21,7 @@ public class Health : MonoBehaviour
 
     [SerializeField] Color _newColor = Color.red;
 
-    private float dyingTime = 3f;
+    private float dyingTime = 2.0f;
 
     [SerializeField] public AudioSource _Dead;
 
@@ -65,7 +65,6 @@ public class Health : MonoBehaviour
 
     IEnumerator KillPlayer()
     {
-        
         thirdPersonMovement.GetComponent<Animator>().Play("Dead");
         _Dead.Play();
         yield return new WaitForSeconds(dyingTime);

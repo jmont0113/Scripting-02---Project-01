@@ -9,6 +9,8 @@ public class ShootableBoxes : MonoBehaviour
 
     [SerializeField] AudioSource boxHitSound;
 
+    [SerializeField] ParticleSystem shootableBoxparticleSystem;
+
     private void Start()
     {
         _health = _maxHealth;
@@ -35,6 +37,7 @@ public class ShootableBoxes : MonoBehaviour
         {
             boxHitSound.Play();
             gameObject.SetActive(false);
+            shootableBoxparticleSystem.Play();
         }
     }
 }
