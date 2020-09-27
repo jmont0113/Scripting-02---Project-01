@@ -87,7 +87,7 @@ public class PlayerCharacterAnimator : MonoBehaviour
     }
     private void OnDead()
     {
-        _animator.CrossFadeInFixedTime(DeadState, 3f);
+        _animator.CrossFadeInFixedTime(DeadState, 2.0f);
     }
 
     private void OnStartMelee()

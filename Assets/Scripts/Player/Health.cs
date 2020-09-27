@@ -21,7 +21,7 @@ public class Health : MonoBehaviour
 
     [SerializeField] Color _newColor = Color.red;
 
-    private float dyingTime = 2.0f;
+    private float dyingTime = 0.75f;
 
     [SerializeField] public AudioSource _Dead;
 
