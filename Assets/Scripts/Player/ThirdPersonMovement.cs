@@ -20,9 +20,9 @@ public class ThirdPersonMovement : MonoBehaviour
 
     [SerializeField] Transform cam = null;
 
-    [SerializeField] float turnSmoothTime = 0.1f;
+    [SerializeField] public float turnSmoothTime = 0.1f;
 
-    float turnSmoothVelocity;
+    private float turnSmoothVelocity;
 
     private Vector3 playerVelocity;
     private bool groundedPlayer;
@@ -32,11 +32,11 @@ public class ThirdPersonMovement : MonoBehaviour
     private float jumpHeight = 1.0f;
     private float gravityValue = -9.81f;
 
-    bool _isMoving = false;
-    bool _isAiming = false;
+    private bool _isMoving = false;
+    private bool _isAiming = false;
 
-    bool _isRunning = false;
-    bool _isSprinting = false;
+    private bool _isRunning = false;
+    private bool _isSprinting = false;
 
     private void Start()
     {

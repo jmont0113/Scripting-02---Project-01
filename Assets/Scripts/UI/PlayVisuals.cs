@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class PlayVisuals : MonoBehaviour
 {
-    [SerializeField] ParticleSystem runningParticleSystem;
+    [SerializeField] public ParticleSystem runningParticleSystem;
 
-    [SerializeField] ParticleSystem sprintingParticleSystem;
-    [SerializeField] ParticleSystem aimingParticleSystem;
+    [SerializeField] public ParticleSystem sprintingParticleSystem;
+    [SerializeField] public ParticleSystem aimingParticleSystem;
 
-    [SerializeField] ParticleSystem meleeParticleSystem;
+    [SerializeField] public ParticleSystem meleeParticleSystem;
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetMouseButtonDown(0))

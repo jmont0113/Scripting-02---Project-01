@@ -6,17 +6,14 @@ public class PlayAudio : MonoBehaviour
 {
     private float landingTime = 1.0f;
 
-    //[SerializeField] AudioSource idleSound;
-    [SerializeField] AudioSource fireballSound;
-    [SerializeField] AudioSource laserSound;
-    [SerializeField] AudioSource walkingSound;
-    [SerializeField] AudioSource jumpingSound;
-    [SerializeField] AudioSource meleeSound;
-    [SerializeField] AudioSource sprintSound;
+    [SerializeField] public AudioSource fireballSound;
+    [SerializeField] public AudioSource laserSound;
+    [SerializeField] public AudioSource walkingSound;
+    [SerializeField] public AudioSource jumpingSound;
+    [SerializeField] public AudioSource meleeSound;
+    [SerializeField] public AudioSource sprintSound;
 
-    [SerializeField] ParticleSystem landing;
-
-    //[SerializeField] AudioSource meleeSound;
+    [SerializeField] public ParticleSystem landing;
 
     void Start()
     {

@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class LaserShot : MonoBehaviour
 {
-    float moveSpeed = 7f;
-    Rigidbody rb;
-    Vector3 moveDirection;
+    private float moveSpeed = 7f;
+    private Rigidbody rb;
+    private Vector3 moveDirection;
     private LineRenderer lr;
+
     void Start()
     {
         lr = GetComponent<LineRenderer>();

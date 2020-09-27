@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class AbilityLoadout : MonoBehaviour
 {
-    public Ability EquippedAbility { get; private set; }
+    [SerializeField] public Ability EquippedAbility { get; private set; }
 
     public void EquipAbility(Ability ability)
     {

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ForwardOverTime : MonoBehaviour
 {
-    float moveSpeed = 7f;
-    Rigidbody rb;
+    private float moveSpeed = 7f;
+    private Rigidbody rb;
 
-    Vector3 moveDirection;
+    private Vector3 moveDirection;
 
     void Update()
     {

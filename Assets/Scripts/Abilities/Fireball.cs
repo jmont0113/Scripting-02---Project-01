@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Fireball : Ability
 {
-    [SerializeField] GameObject _projectileSpawned = null;
+    [SerializeField] public GameObject _projectileSpawned = null;
 
-    int _rank = 1;
+    private int _rank = 1;
 
     public override void Use(Transform origin, Transform target)
     {

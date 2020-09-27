@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Cure : Ability
 {
-    int _healthAmount = 25;
+    private int _healthAmount = 25;
 
     public override void Use(Transform origin, Transform target)
     {
